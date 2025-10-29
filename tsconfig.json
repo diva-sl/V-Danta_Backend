@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "rootDir": ".",
+    "resolveJsonModule": true,
+    "allowJs": true
+  },
+  "include": [
+    "src",
+    "controllers",
+    "models",
+    "routes",
+    "utils",
+    "server.ts",
+    "seed.ts"
+  ]
+}
