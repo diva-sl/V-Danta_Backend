@@ -21,8 +21,6 @@ export class StepLog
   public userId!: number;
   public date!: string;
   public steps!: number;
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
 }
 
 StepLog.init(
@@ -36,7 +34,11 @@ StepLog.init(
     date: { type: DataTypes.STRING(10), allowNull: false },
     steps: { type: DataTypes.INTEGER.UNSIGNED, defaultValue: 0 },
   },
-  { sequelize, tableName: "step_logs", modelName: "StepLog" }
+  {
+    sequelize,
+    tableName: "step_logs",
+    modelName: "StepLog",
+  }
 );
 
 User.hasMany(StepLog, { foreignKey: "userId" });

@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { getToday, addSteps, list } from "../controllers/trackingController";
+import { authMiddleware } from "../middlewares/auth";
+import { getToday, addSteps, summary } from "../controllers/trackingController";
 
 const router = Router();
-router.get("/today", getToday);
-router.post("/add", addSteps);
-router.get("/list", list);
+
+router.get("/today", authMiddleware, getToday);
+router.post("/add", authMiddleware, addSteps);
+router.get("/summary", authMiddleware, summary);
 
 export default router;

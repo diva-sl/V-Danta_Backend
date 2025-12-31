@@ -1,7 +1,7 @@
 import { connectDB, sequelize } from "./src/db";
 import bcrypt from "bcryptjs";
 import { User } from "./models/User";
-import { SkillVideo } from "./models/SkillsVideo";
+import { SkillVideo } from "./models/SkillVideo";
 
 (async () => {
   await connectDB();

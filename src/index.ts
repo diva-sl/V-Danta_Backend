@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import { connectDB } from "../src/db";
-import authRoutes from "../routes/authRoutes";
+import userRoutes from "../routes/userRoutes";
 import stepsRoutes from "../routes/trackingRoutes";
 import videosRoutes from "../routes/skillsRoutes";
 
@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/api/health", (_req, res) => res.json({ ok: true }));
-app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/steps", stepsRoutes);
 app.use("/api/videos", videosRoutes);
 

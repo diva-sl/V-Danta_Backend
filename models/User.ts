@@ -3,34 +3,71 @@ import { sequelize } from "../src/db";
 
 export interface UserAttributes {
   id: number;
-  email: string;
-  passwordHash: string;
+  email?: string;
+  phone?: string;
+  passwordHash?: string;
   name: string;
+  isVerified: boolean;
+  level: number;
+  stage: number;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, "id"> {}
+interface UserCreationAttributes
+  extends Optional<
+    UserAttributes,
+    "id" | "email" | "phone" | "passwordHash" | "isVerified" | "level" | "stage"
+  > {}
 
-export class User
-  extends Model<UserAttributes, UserCreationAttributes>
-  implements UserAttributes
-{
-  public id!: number;
-  public email!: string;
-  public passwordHash!: string;
-  public name!: string;
-  static id: number | undefined;
-}
+export class User extends Model<UserAttributes, UserCreationAttributes> {}
 
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    email: { type: DataTypes.STRING, allowNull: false, unique: true },
-    passwordHash: { type: DataTypes.STRING, allowNull: false },
-    name: { type: DataTypes.STRING, allowNull: false },
+
+    email: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: true,
+    },
+
+    phone: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: true,
+    },
+
+    passwordHash: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    isVerified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+
+    level: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
+
+    stage: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
   },
-  { sequelize, tableName: "users", modelName: "User" }
+  {
+    sequelize,
+    tableName: "users",
+    modelName: "User",
+  }
 );

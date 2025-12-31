@@ -1,5 +1,25 @@
 import { Request, Response } from "express";
-import { SkillVideo } from "../models/SkillsVideo";
+import { SkillVideo } from "../models/SkillVideo";
+import * as skillService from "../services/skillService";
+
+export const getCourses = async (_req: Request, res: Response) => {
+  try {
+    const courses = await skillService.getAllCourses();
+    res.json(courses);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch courses" });
+  }
+};
+
+export const getCourseVideos = async (req: Request, res: Response) => {
+  try {
+    const courseId = Number(req.params.courseId);
+    const videos = await skillService.getCourseVideos(courseId);
+    res.json(videos);
+  } catch {
+    res.status(500).json({ error: "Failed to fetch videos" });
+  }
+};
 
 // 📌 List all skill videos for a user
 export const listSkills = async (req: Request, res: Response) => {
